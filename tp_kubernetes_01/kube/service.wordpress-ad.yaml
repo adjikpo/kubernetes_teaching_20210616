@@ -6,19 +6,21 @@ metadata:
     run: wordpress-ad
   name: wordpress-ad
   namespace: wordpress-mysql-ad
-  resourceVersion: "32444"
-  uid: aa5754db-0fe0-46da-931a-7bc93cb470b9
+  resourceVersion: "35128"
+  uid: c5aad427-8f60-4792-9452-9c7f2abc872b
 spec:
-  clusterIP: 10.105.175.51
+  clusterIP: 10.104.206.24
   clusterIPs:
-  - 10.105.175.51
+  - 10.104.206.24
+  externalTrafficPolicy: Cluster
   ports:
-  - port: 8080
+  - nodePort: 30021
+    port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
     run: wordpress-ad
   sessionAffinity: None
-  type: ClusterIP
+  type: NodePort
 status:
   loadBalancer: {}
