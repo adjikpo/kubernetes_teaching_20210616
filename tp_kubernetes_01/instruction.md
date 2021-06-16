@@ -45,6 +45,6 @@ Voici les étapes pour avoir les fichiers yaml
 - `kubectl delete pod wordpress-ad mysql-ad`
 - `kubectl delete service wordpress-ad mysql-ad`
 
-### Déploiment des fichiers
+### Déploiment avec les fichiers yaml
 -  `cd ./tp_kubernetes_01/kube/`
 - `kubectl apply -f .`
