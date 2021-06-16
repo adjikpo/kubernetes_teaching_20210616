@@ -33,8 +33,8 @@ Le rendu doit avoir la forme d'un dépot GIT (public) contenant des fichiers yam
 * kubectl get ... -o yaml > fichier
 
 ## Réponse
-
-### Pod et service 
+Voici les étapes pour avoir les fichiers yaml
+### Creation des fichiers yaml pod et service 
 - `kubectl run wordpress-ad --image=wordpress --dry-run=client --port=8080 -o yaml > pod.wordpress-ad.yaml`
 - `kubectl run mysql-ad --image=mysql:5.7 --dry-run=client  --port=3306 -o yaml > pod.mysql-ad.yaml`
 
@@ -44,4 +44,7 @@ Le rendu doit avoir la forme d'un dépot GIT (public) contenant des fichiers yam
 - `kubectl expose pod mysql-ad -o yaml > service.mysql-ad.yaml`
 - `kubectl delete pod wordpress-ad mysql-ad`
 - `kubectl delete service wordpress-ad mysql-ad`
+
+### Déploiment des fichiers
+-  `cd ./tp_kubernetes_01/kube/`
 - `kubectl apply -f .`
