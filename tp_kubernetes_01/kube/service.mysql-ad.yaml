@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2021-06-16T10:56:02Z"
+  labels:
+    run: mysql-ad
+  name: mysql-ad
+  namespace: demoday01
+  resourceVersion: "32303"
+  uid: b5f0eb3f-0830-473b-98e0-d51ad17cddee
+spec:
+  clusterIP: 10.96.136.58
+  clusterIPs:
+  - 10.96.136.58
+  ports:
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
+  selector:
+    run: mysql-ad
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

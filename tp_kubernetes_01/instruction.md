@@ -13,7 +13,7 @@ Le rendu doit avoir la forme d'un dépot GIT (public) contenant des fichiers yam
 
 ## AVEC KUBERNETES (préparation)
 
-2. créer un pod pour chaque container présent dans docker-compose
+2. créer un pod pour chaque container présent dans docker-compose 
 3. utilisez les meme variables d'environnement que dans la version docker-compose
    (voir `kubectl explain pod.spec.containers.env` si besoin)
 3. créer un service pour chaque pod créé (en respectant les ports ouvert dans
@@ -31,3 +31,17 @@ Le rendu doit avoir la forme d'un dépot GIT (public) contenant des fichiers yam
 * kubectl run ...
 * kubectl expose ...
 * kubectl get ... -o yaml > fichier
+
+## Réponse
+
+### Pod et service 
+- `kubectl run wordpress-ad --image=wordpress --dry-run=client --port=8080 -o yaml > pod.wordpress-ad.yaml`
+- `kubectl run mysql-ad --image=mysql:5.7 --dry-run=client  --port=3306 -o yaml > pod.mysql-ad.yaml`
+
+- `kubectl create -f . `
+
+- `kubectl expose pod wordpress-ad -o yaml > service.wordpress-ad.yaml`
+- `kubectl expose pod mysql-ad -o yaml > service.mysql-ad.yaml`
+- `kubectl delete pod wordpress-ad mysql-ad`
+- `kubectl delete service wordpress-ad mysql-ad`
+- `kubectl apply -f .`
