@@ -5,6 +5,7 @@ metadata:
   labels:
     run: mysql-ad
   name: mysql-ad
+  namespace: wordpress-mysql-ad
 spec:
   containers:
   - image: mysql:5.7

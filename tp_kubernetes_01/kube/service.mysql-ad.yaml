@@ -5,7 +5,7 @@ metadata:
   labels:
     run: mysql-ad
   name: mysql-ad
-  namespace: demoday01
+  namespace: wordpress-mysql-ad
   resourceVersion: "32303"
   uid: b5f0eb3f-0830-473b-98e0-d51ad17cddee
 spec:
