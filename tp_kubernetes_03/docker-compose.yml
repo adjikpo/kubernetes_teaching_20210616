@@ -1,8 +1,11 @@
+---
 version: '3.1'
 
 services:
   wordpress:
     image: wordpress
+    volumes:
+      - wordpress_data:/var/www/html
     ports:
       - 8080:80
     environment:
@@ -13,8 +16,14 @@ services:
 
   db:
     image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
     environment:
       MYSQL_DATABASE: exampledb
       MYSQL_USER: exampleuser
       MYSQL_PASSWORD: examplepass
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
+
+volumes:
+  wordpress_data:
+  db_data:

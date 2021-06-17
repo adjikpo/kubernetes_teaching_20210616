@@ -10,7 +10,8 @@ metadata:
   name: wordpress
 spec:
   replicas: 1
-  strategy: {}
+  strategy:
+    type: Recreate
   template:
     metadata:
       creationTimestamp: null
@@ -32,5 +33,12 @@ spec:
         ports:
         - containerPort: 80
         resources: {}
+        volumeMounts:
+        - mountPath: /var/www/html
+          name: wordpress-data
       restartPolicy: Always
+      volumes:
+      - name: wordpress-data
+        persistentVolumeClaim:
+          claimName: wordpress-data
 status: {}
