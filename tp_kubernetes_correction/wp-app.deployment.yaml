@@ -1,0 +1,52 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: wp-app
+  name: wp-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wp-app
+  template:
+    metadata:
+      labels:
+        app: wp-app
+    spec:
+      containers:
+        - env:
+            # - name: WORDPRESS_DB_HOST
+            #   value: db
+            # - name: WORDPRESS_DB_NAME
+            #   value: exampledb
+            # - name: WORDPRESS_DB_PASSWORD
+            #   value: examplepass
+            # - name: WORDPRESS_DB_USER
+            #   value: exampleuser
+            - name: WORDPRESS_DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: blog-access
+                  key: BLOG_DB_HOST
+            - name: WORDPRESS_DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: blog-access
+                  key: BLOG_DB_NAME
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: blog-access
+                  key: BLOG_DB_PASSWORD
+            - name: WORDPRESS_DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: blog-access
+                  key: BLOG_DB_USERNAME
+          image: wordpress:5.7
+          name: wp-app
+          ports:
+            - containerPort: 80
+      restartPolicy: Always

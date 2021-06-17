@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: wp-db
+  name: wp-db
+spec:
+  ports:
+    - port: 3306
+      targetPort: 3306
+  type: ClusterIP
+  selector:
+    app: wp-db

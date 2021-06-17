@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: wp-app
+  name: wp-app
+spec:
+  ports:
+    - nodePort: null
+      port: 80
+      targetPort: 80
+  type: NodePort
+  selector:
+    app: wp-app

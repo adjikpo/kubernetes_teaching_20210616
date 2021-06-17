@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: blog-access
+data:
+  BLOG_DB_NAME: blog
+  BLOG_DB_USERNAME: userblog
+  BLOG_DB_PASSWORD: passblog42@
+  BLOG_DB_HOST: wp-db

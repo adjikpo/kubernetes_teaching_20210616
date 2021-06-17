@@ -68,6 +68,8 @@ Voici les étapes pour avoir les fichiers yaml
 
 - `kubectl create deployment mysql-ad --image=mysql:5.7 --port=3306 --replicas=1 --dry-run=client -o yaml> deployment.mysql-ad.yaml`
 
+- `kubectl create configmap configmap-ad -o yaml > configmap.wpmysql-ad.yaml`
+
 - `kubectl expose deployment wordpress-ad --type=NodePort -o yaml > service.wordpress-ad.yaml`
 - `kubectl expose deployment mysql-ad -o yaml > service.mysql-ad.yaml`
 

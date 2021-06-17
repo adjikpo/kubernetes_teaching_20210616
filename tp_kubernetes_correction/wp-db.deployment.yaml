@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: wp-db
+  name: wp-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wp-db
+  template:
+    metadata:
+      labels:
+        app: wp-db
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: blog-access
+                  key: BLOG_DB_NAME
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: blog-access
+                  key: BLOG_DB_PASSWORD
+            - name: MYSQL_RANDOM_ROOT_PASSWORD
+              value: "1"
+            - name: MYSQL_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: blog-access
+                  key: BLOG_DB_USERNAME
+          image: mysql:5.7
+          name: wp-db
