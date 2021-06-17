@@ -53,7 +53,7 @@ Le rendu doit avoir la forme d'un dépot GIT (public) contenant des fichiers yam
 ## Réponse
 Voici les étapes pour avoir les fichiers yaml
 ### Creation des fichiers yaml pod et service 
-- `kubectl run wordpress-ad --image=wordpress --dry-run=client --port=8080 -o yaml > pod.wordpress-ad.yaml`
+- `kubectl run wordpress-ad --image=wordpress --dry-run=client --port=80 -o yaml > pod.wordpress-ad.yaml`
 - `kubectl run mysql-ad --image=mysql:5.7 --dry-run=client  --port=3306 -o yaml > pod.mysql-ad.yaml`
 - ajouter les informations du docker-compose pour l'env `kubectl explain pod.spec.containers.env`
 - `kubectl create -f . `
@@ -63,10 +63,14 @@ Voici les étapes pour avoir les fichiers yaml
 - `kubectl delete pod wordpress-ad mysql-ad`
 - `kubectl delete service wordpress-ad mysql-ad`
 
+### Creation des fichiers yaml deployment et service 
+- `kubectl create deployment wordpress-ad --image=wordpress:5.7 --port=80 --replicas=2 --dry-run=client -o yaml> deployment.wordpress-ad.yaml`
+
+- `kubectl create deployment mysql-ad --image=mysql:5.7 --port=3306 --replicas=1 --dry-run=client -o yaml> deployment.mysql-ad.yaml`
+
+- `kubectl expose deployment wordpress-ad --type=NodePort -o yaml > service.wordpress-ad.yaml`
+- `kubectl expose deployment mysql-ad -o yaml > service.mysql-ad.yaml`
+
+
 ### Déploiment avec les fichiers yaml
--  `cd ./tp_kubernetes_01/kube/`
 - `kubectl apply -f .`
-
-- `kubectl create deployment wordpress-ad --image=wordpress --port=8080 --replicas=2 --dry-run=client -o yaml> deployment.wordpress-ad.yaml`
-
-- `kubectl create deployment wordpress-ad --image=wordpress --port=8080 --replicas=2 --dry-run=client -o yaml> deployment.wordpress-ad.yaml`

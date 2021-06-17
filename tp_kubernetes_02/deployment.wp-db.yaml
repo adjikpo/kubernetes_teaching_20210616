@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: wp-db
+  name: wp-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wp-db
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: wp-db
+    spec:
+      containers:
+      - image: mysql:5.7
+        name: mysql
+        ports:
+        - containerPort: 3306
+        resources: {}
+status: {}
