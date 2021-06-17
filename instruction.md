@@ -1,4 +1,4 @@
-# TP Kubernetes n°1
+# TP Kubernetes
 
 Envoyer votre réponse à teaching@glenux.net (en précisant votre nom)
 
@@ -20,7 +20,24 @@ Le rendu doit avoir la forme d'un dépot GIT (public) contenant des fichiers yam
    docker-compose)
 4. vérifier que ça fonctionne 
 
-## AVEC KUBERNETES (déploiement)
+## AVEC KUBERNETES Tp1 (préparation)
+
+2. créer un deploiement + service K8S pour chaque "service" présent dans `docker-compose.yml`
+  * wp-app: le container wordpress:5.7 (avec 2 répliques)
+  * wp-db: le container mariadb:5.7 (avec 1 réplique)
+4. créer des configmap ou des secrets pour mutualiser la configuration entre les déploiements
+   * BLOG_DB_NAME=blog
+   * BLOG_DB_USERNAME=userblog
+   * BLOG_DB_PASSWORD=passblog42@
+   * BLOG_DB_HOST=wp-db
+5. utilisez les meme variables d'environnement que dans la version docker-compose
+   (voir `kubectl explain pod.spec.containers.env` si besoin)
+5. créer un service pour chaque pod créé (en respectant les ports ouvert dans
+   docker-compose)
+6. vérifier que ça fonctionne 
+
+
+## AVEC KUBERNETES Tp2 (déploiement)
 
 5. détruisez les objets présents sur le cluster
 6. vérifiez que vous arrivez bien à tout re-créer avec `kubectl apply -f .`
@@ -30,6 +47,7 @@ Le rendu doit avoir la forme d'un dépot GIT (public) contenant des fichiers yam
 
 * kubectl run ...
 * kubectl expose ...
+* kubectl create ... 
 * kubectl get ... -o yaml > fichier
 
 ## Réponse
@@ -37,7 +55,7 @@ Voici les étapes pour avoir les fichiers yaml
 ### Creation des fichiers yaml pod et service 
 - `kubectl run wordpress-ad --image=wordpress --dry-run=client --port=8080 -o yaml > pod.wordpress-ad.yaml`
 - `kubectl run mysql-ad --image=mysql:5.7 --dry-run=client  --port=3306 -o yaml > pod.mysql-ad.yaml`
-- ajouter les informations du docker-compose pour l'env
+- ajouter les informations du docker-compose pour l'env `kubectl explain pod.spec.containers.env`
 - `kubectl create -f . `
 
 - `kubectl expose pod wordpress-ad --type=NodePort -o yaml > service.wordpress-ad.yaml`
@@ -48,3 +66,7 @@ Voici les étapes pour avoir les fichiers yaml
 ### Déploiment avec les fichiers yaml
 -  `cd ./tp_kubernetes_01/kube/`
 - `kubectl apply -f .`
+
+- `kubectl create deployment wordpress-ad --image=wordpress --port=8080 --replicas=2 --dry-run=client -o yaml> deployment.wordpress-ad.yaml`
+
+- `kubectl create deployment wordpress-ad --image=wordpress --port=8080 --replicas=2 --dry-run=client -o yaml> deployment.wordpress-ad.yaml`
