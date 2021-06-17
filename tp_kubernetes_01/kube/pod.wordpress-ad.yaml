@@ -1,17 +1,15 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  creationTimestamp: null
   labels:
     run: wordpress-ad
   name: wordpress-ad
-  namespace: wordpress-mysql-ad
 spec:
   containers:
   - image: wordpress
     name: wordpress-ad
     ports:
-    - containerPort: 8080
+    - containerPort: 80
     env:
     - name: WORDPRESS_DB_HOST
       value: mysql

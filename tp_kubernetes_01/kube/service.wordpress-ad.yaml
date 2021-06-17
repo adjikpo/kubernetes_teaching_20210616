@@ -1,13 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  creationTimestamp: null
   labels:
     run: wordpress-ad
   name: wordpress-ad
-  namespace: wordpress-mysql-ad
-  resourceVersion: "35128"
-  uid: c5aad427-8f60-4792-9452-9c7f2abc872b
 spec:
   clusterIP: 10.104.206.24
   clusterIPs:
@@ -15,9 +11,9 @@ spec:
   externalTrafficPolicy: Cluster
   ports:
   - nodePort: 30021
-    port: 8080
+    port: 80
     protocol: TCP
-    targetPort: 8080
+    targetPort: 80
   selector:
     run: wordpress-ad
   sessionAffinity: None
